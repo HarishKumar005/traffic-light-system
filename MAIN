@@ -1,0 +1,62 @@
+<?php
+
+$light = $_GET['light'];
+
+switch ($light) {
+    case 'red':
+        $nextLight = 'green';
+        break;
+    case 'green':
+        $nextLight = 'yellow';
+        break;
+    case 'yellow':
+        $nextLight = 'red';
+        break;
+    default:
+        $nextLight = 'red';
+}
+
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Traffic Signal Simulation</title>
+    <style>
+        body {
+            text-align: center;
+        }
+        .traffic-light {
+            width: 100px;
+            background: black;
+            padding: 20px;
+            border-radius: 10px;
+            margin: auto;
+        }
+        .light {
+            width: 60px;
+            height: 60px;
+            margin: 10px auto;
+            border-radius: 50%;
+            background: gray;
+        }
+        .red { background: <?= $light == 'red' ? 'red' : 'gray' ?>; }
+        .yellow { background: <?= $light == 'yellow' ? 'yellow' : 'gray' ?>; }
+        .green { background: <?= $light == 'green' ? 'green' : 'gray' ?>; }
+    </style>
+    <script>
+        setTimeout(() => {
+            window.location.href = "?light=<?= $nextLight ?>";
+        }, 3000);
+    </script>
+</head>
+<body>
+    <h1>Traffic Signal</h1>
+    <div class="traffic-light">
+        <div class="light red"></div>
+        <div class="light yellow"></div>
+        <div class="light green"></div>
+    </div>
+    <p>Current Light: <strong><?= ucfirst($light) ?></strong></p>
+</body>
+</html>
